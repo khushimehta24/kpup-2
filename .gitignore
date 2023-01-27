@@ -9,3 +9,5 @@ venv/
 ENV/
 # VS Code settings
 media/
+.ipynb_checkpoints/
+*.json
