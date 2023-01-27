@@ -35,3 +35,27 @@ class LoginAPI(GenericAPIView):
             return Response(token.key,status = status.HTTP_200_OK)
         else:   
             return Response('Invalid Credentials',status = status.HTTP_404_NOT_FOUND)
+
+class UserGetAPI(GenericAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        try:
+            user = User.objects.get(email = request.user.email)
+            serializer = self.serializer_class(user)
+        except:
+            return Response("User not found", status= status.HTTP_404_NOT_FOUND)
+        return Response(serializer.data)
+
+    def put(self,request,*args,**kwargs):
+        user = User.objects.get(email=request.user.email)
+        data = request.data
+        if user.email != data['email']:
+            user.delete()
+            user = User.objects.create_user(data['email'], data['password'])
+            token = Token.objects.create(user=user)
+        serializer = self.serializer_class(data=data)
+        user = serializer.update(request.data, user)
+        return Response(request.data, status = status.HTTP_200_OK)
+
