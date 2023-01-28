@@ -14,12 +14,13 @@ const getBarcode = (data) => {
 const getBarcodeDetails = (value) => {
     console.log(value)
     return httpCommon.get("https://barcode-lookup.p.rapidapi.com/v3/products",
-        { params: { barcode: value } }, {
-        headers: {
-            'X-RapidAPI-Key': '7d06f922c1msh82cd37da0868d81p1268b8jsnee2fb47acd80',
-            'X-RapidAPI-Host': 'barcode-lookup.p.rapidapi.com'
-        }
-    })
+        {
+            params: { barcode: value },
+            headers: {
+                'X-RapidAPI-Key': '7d06f922c1msh82cd37da0868d81p1268b8jsnee2fb47acd80',
+                'X-RapidAPI-Host': 'barcode-lookup.p.rapidapi.com'
+            }
+        })
 }
 
 export default {

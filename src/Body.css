@@ -1,0 +1,18 @@
+.react-kanban-column{
+    border-radius: 10px;
+    box-shadow:  0px 4px 48px rgba(0, 0, 0, 0.02);
+    background-color: #f3f3f3;
+}
+
+.react-kanban-card{
+    box-shadow:  0px 4px 48px rgba(0, 0, 0, 0.02);
+}
+
+.react-kanban-card__title{
+    font-family: 'Poppins' ;
+}
+
+.react-kanban-card__description , .react-kanban-card-adder-form__description{
+    font-size: 10px;
+    color: #cacaca;
+}

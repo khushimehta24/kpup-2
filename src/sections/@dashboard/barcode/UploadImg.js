@@ -40,6 +40,9 @@ function UploadImg() {
             .then(async (res) => {
                 console.log(res);
                 await BarcodeService.getBarcodeDetails(res.data.data[0].allFields[0].fieldValue)
+                    .then((res) => {
+                        console.log(res);
+                    })
             })
             .catch((e) => {
                 console.log(e)
