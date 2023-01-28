@@ -36,7 +36,7 @@ class ItemPutAPI(GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = StorageItemPostSerializer
 
-    def put(self, request, pk):
+    def put(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.update(request.data)
