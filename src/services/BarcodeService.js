@@ -17,7 +17,7 @@ const getBarcodeDetails = (value) => {
         {
             params: { barcode: value },
             headers: {
-                'X-RapidAPI-Key': '7d06f922c1msh82cd37da0868d81p1268b8jsnee2fb47acd80',
+                'X-RapidAPI-Key': '98f36c5472msh076a2d700a772d9p1ef7d7jsna208caebc87b',
                 'X-RapidAPI-Host': 'barcode-lookup.p.rapidapi.com'
             }
         })

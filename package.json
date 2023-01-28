@@ -48,6 +48,7 @@
     "@faker-js/faker": "^7.6.0",
     "@iconify/react": "^4.0.0",
     "@lourenci/react-kanban": "^2.1.0",
+    "@mui/icons-material": "^5.11.0",
     "@mui/lab": "^5.0.0-alpha.103",
     "@mui/material": "^5.10.9",
     "apexcharts": "^3.36.0",

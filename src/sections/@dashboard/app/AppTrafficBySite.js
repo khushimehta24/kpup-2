@@ -8,6 +8,7 @@ import SuggestedProducts from '../../../services/SuggestedProducts';
 import SuggestedProductsCard from './SuggestedProductsCard';
 // import errorHandler from "../../../helpers/errorHandler"
 import spinner from "../../../images/marioloader.gif"
+import Loader from '../../../helpers/Loader';
 // ----------------------------------------------------------------------
 
 AppTrafficBySite.propTypes = {
@@ -81,9 +82,7 @@ export default function AppTrafficBySite({ title, subheader, list, ...other }) {
         <CardContent>
           {loading ?
             <>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <CardMedia component="img" image={spinner} sx={{ height: "200px", width: "200px" }} />
-              </Box>
+              <Loader />
             </>
             :
             <>

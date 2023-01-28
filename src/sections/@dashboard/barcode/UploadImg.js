@@ -1,6 +1,5 @@
-import { Box } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import React, { useState, useEffect } from 'react'
-import fs from 'fs'
 import ImageUploader from 'react-image-upload'
 import { v4 as uuidv4 } from 'uuid';
 import 'react-image-upload/dist/index.css'
@@ -13,15 +12,29 @@ import {
 } from "firebase/storage";
 import { storage } from "../../../firebase/config"
 import BarcodeService from '../../../services/BarcodeService';
-
+import AddProduct from '../app/AddProduct';
+import Loader from '../../../helpers/Loader';
 
 function UploadImg() {
 
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
-
+    const [editSinglePerson, setEditSinglePerson] = useState('Add');
+    const [load, setLoad] = useState(false)
+    const [json, setJson] = useState({
+        'name': '',
+        'desc': '',
+        'img': '',
+        'added_date': new Date(),
+        'expiry_date': '',
+        'category': {
+            'name': ''
+        },
+        'costcount': (Array(Number(1)).fill("")),
+    })
     const imagesListRef = ref(storage, "images/");
     const uploadFile = () => {
+        setLoad(true)
         if (imageUpload == null) return;
         const imageRef = ref(storage, `images/${imageUpload.name} + ${uuidv4()}`);
         uploadBytes(imageRef, imageUpload).then((snapshot) => {
@@ -41,7 +54,9 @@ function UploadImg() {
                 console.log(res);
                 await BarcodeService.getBarcodeDetails(res.data.data[0].allFields[0].fieldValue)
                     .then((res) => {
-                        console.log(res);
+                        setJson({ ...json, 'name': res.data.products[0].title, 'img': res.data.products[0].images[0], 'desc': res.data.products[0].description })
+                        setLoad(false)
+
                     })
             })
             .catch((e) => {
@@ -68,21 +83,33 @@ function UploadImg() {
     //     });
 
     // }, []);
+    console.log(json);
 
     return (
         <>
-            {/* <Box sx={{ display: { md: 'flex', sm: 'flex', xs: 'none' } }}> <ImageUploader
-                style={{ height: '300px', width: '300px', marginBottom: '8%' }}
-                onFileAdded={uploadFile()}
-                /></Box> */}
+            <Grid container>
+                <Grid item md={4}>
+                    <input
+                        type="file"
+                        onChange={(event) => {
+                            setImageUpload(event.target.files[0]);
+                        }}
+                    />
+                    <button type="button" onClick={uploadFile}> Upload Image</button>
+                </Grid>
 
-            <input
+                {!load ? <AddProduct img={imageUrls} json={json} setJson={setJson} /> : <Grid item md={8} sx={{ width: '100%', display: 'flex', 'justifyContent': 'center', height: '400px', alignItems: 'center' }}>
+                    <Loader />
+
+                </Grid>}
+            </Grid>
+            {/* <input
                 type="file"
                 onChange={(event) => {
                     setImageUpload(event.target.files[0]);
                 }}
             />
-            <button type="button" onClick={uploadFile}> Upload Image</button>
+            <button type="button" onClick={uploadFile}> Upload Image</button> */}
         </>
     )
 }
