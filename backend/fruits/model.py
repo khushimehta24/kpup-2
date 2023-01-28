@@ -4,7 +4,7 @@ from PIL import Image
 
 # model = torch.hub.load('ultralytics/yolov5', 'custom', path='path/to/best.pt')  # local model
 def fruit_detection(img):
-    model = torch.hub.load('D:\\Coding\\Hackathons\\BitNBuildTest\\backend\\fruits\\yolov5', 'custom', path='D:\\Coding\\Hackathons\\BitNBuildTest\\backend\\fruits\\yolov5\\runs\\train\\exp2\\weights\\best.pt', source='local')  # local repo
+    model = torch.hub.load('C:\\Users\\khush\\BitNBuildTest\\backend\\fruits\\yolov5', 'custom', path='C:\\Users\\khush\\BitNBuildTest\\backend\\fruits\\best.pt', source='local')  # local repo
 
     im_path = img
 
