@@ -30,6 +30,9 @@ class StorageItemPostSerializer(serializers.ModelSerializer):
             CostCount.objects.create(item = storage_item, **costcount)
         return validated_data
 
+    def update(self, instance, validated_data):
+        pass
+
 
 class StorageItemGetSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
@@ -41,8 +44,5 @@ class StorageItemGetSerializer(serializers.ModelSerializer):
 
     def get_costcount(self, obj):
         costcount_objs = CostCount.objects.filter(item = obj)
-        list1 = []
-        for cc_obj in costcount_objs:
-            cc_data = CostCountSerializer(cc_obj).data
-            list1.append(cc_data)
-        return list1
+        cc_data = CostCountSerializer(costcount_objs, many=True).data
+        return cc_data
