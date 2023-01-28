@@ -1,9 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 // @mui
-import { Container, Stack, Typography } from '@mui/material';
+import { Container, Stack, Typography, Button } from '@mui/material';
+import Iconify from '../components/iconify';
 // components
-import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
+import { ProductSort, ProductList, ProductFilterSidebar } from '../sections/@dashboard/products';
 // mock
 import PRODUCTS from '../_mock/products';
 
@@ -24,9 +25,14 @@ export default function ProductsPage() {
     <>
 
       <Container>
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Products
-        </Typography>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <Typography variant="h4" gutterBottom>
+            Products
+          </Typography>
+          <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
+            New Product
+          </Button>
+        </Stack>
 
         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
@@ -40,7 +46,7 @@ export default function ProductsPage() {
         </Stack>
 
         <ProductList products={PRODUCTS} />
-        <ProductCartWidget />
+        {/* <ProductCartWidget /> */}
       </Container>
     </>
   );

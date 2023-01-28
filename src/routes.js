@@ -13,6 +13,8 @@ import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import BarcodePage from './pages/BarcodePage';
 
+import UploadCSV from './sections/@dashboard/csvupload/UploadCSV'
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -27,6 +29,7 @@ export default function Router() {
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
         { path: 'scanbarcode', element: <BarcodePage /> },
+        { path: 'uploadcsv', element: <UploadCSV /> }
 
       ],
     },
