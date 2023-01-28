@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Card, Paper, Typography, CardHeader, CardContent, InputLabel, MenuItem, Select, CardMedia } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import HorizontalScroll from 'react-horizontal-scrolling';
 import { fShortenNumber } from '../../../utils/formatNumber';
 import SuggestedProducts from '../../../services/SuggestedProducts';
 import SuggestedProductsCard from './SuggestedProductsCard';
