@@ -31,3 +31,13 @@ class ItemGetAPI(GenericAPIView):
         data = self.serializer_class(storage_items, many=True).data
         return JsonResponse({"response" : data}, status= status.HTTP_200_OK)
         
+
+class ItemPutAPI(GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = StorageItemPostSerializer
+
+    def put(self, request, pk):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.update(request.data)
+        return JsonResponse(serializer.data, status=status.HTTP_202_ACCEPTED)
