@@ -10,7 +10,7 @@ const board = {
             id: 1,
             title: "Restock",
             cards: []
-        },
+        }, 
         {
             id: 2,
             title: "Dispatch",
