@@ -2426,7 +2426,7 @@
     "deepmerge" "^4.2.2"
     "svgo" "^2.8.0"
 
-"@svgr/webpack@^5.5.0", "@svgr/webpack@^6.5.0":
+"@svgr/webpack@^6.5.0":
   "integrity" "sha512-rM/Z4pwMhqvAXEHoHIlE4SeTb0ToQNmJuBdiHwhP2ZtywyX6XqrgCv2WX7K/UCgNYJgYbekuylgyjnuLUHTcZQ=="
   "resolved" "https://registry.npmjs.org/@svgr/webpack/-/webpack-6.5.0.tgz"
   "version" "6.5.0"
@@ -7204,6 +7204,11 @@
   "integrity" "sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ=="
   "resolved" "https://registry.npmjs.org/p-try/-/p-try-2.2.0.tgz"
   "version" "2.2.0"
+
+"papaparse@^5.3.2":
+  "integrity" "sha512-6dNZu0Ki+gyV0eBsFKJhYr+MdQYAzFUGlBMNj3GNrmHxmz1lfRa24CjFObPXtjcetlOv5Ad299MhIK0znp3afw=="
+  "resolved" "https://registry.npmjs.org/papaparse/-/papaparse-5.3.2.tgz"
+  "version" "5.3.2"
 
 "param-case@^3.0.4":
   "integrity" "sha512-RXlj7zCYokReqWpOPH9oYivUzLYZ5vAPIfEmCTNViosC78F8F0H9y7T7gG2M39ymgutxF5gcFEsyZQSph9Bp3A=="

@@ -12,17 +12,9 @@ const UploadCSV = () => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-
-        if (file) {
-            fileReader.onload = function (event) {
-                const csvOutput = event.target.result;
-                console.log(csvOutput);
-            };
-
-            fileReader.readAsText(file);
-        }
     };
 
+    console.log(file)
 
     return (
         <div>
