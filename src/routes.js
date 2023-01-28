@@ -12,7 +12,7 @@ import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import BarcodePage from './pages/BarcodePage';
-
+import Kanban from "./pages/Kanban"
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -27,6 +27,7 @@ export default function Router() {
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
         { path: 'scanbarcode', element: <BarcodePage /> },
+        { path: 'schedule', element: <Kanban /> },
 
       ],
     },
