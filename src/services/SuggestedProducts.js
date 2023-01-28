@@ -6,6 +6,12 @@ const getCategoryList =async ()=>{
     return response
 }
 
+const getCategoryItems = async (category)=>{
+    const response = await httpCommon.post(`/webscraper/items/`,{ "name" : category })
+    return response
+}
+
 export default {
-    getCategoryList
+    getCategoryList 
+    ,getCategoryItems
 }
