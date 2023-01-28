@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
@@ -14,6 +14,7 @@ import NavSection from '../../../components/nav-section';
 //
 import navConfig from './config';
 import logo from "../../../images/logo.png"
+import { kpupContext } from '../../../context';
 // ----------------------------------------------------------------------
 
 const NAV_WIDTH = 280;
@@ -34,6 +35,7 @@ Nav.propTypes = {
 };
 
 export default function Nav({ openNav, onCloseNav }) {
+  const { user } = useContext(kpupContext)
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive('up', 'lg');
@@ -63,7 +65,7 @@ export default function Nav({ openNav, onCloseNav }) {
 
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {user && user.name}
               </Typography>
 
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>

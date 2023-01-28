@@ -59,6 +59,7 @@
     "history": "^5.3.0",
     "lodash": "^4.17.21",
     "numeral": "^2.0.6",
+    "papaparse": "^5.3.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
