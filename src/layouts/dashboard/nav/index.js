@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
@@ -14,6 +14,7 @@ import NavSection from '../../../components/nav-section';
 //
 import navConfig from './config';
 import logo from "../../../images/logo.png"
+import { kpupContext } from '../../../context';
 // ----------------------------------------------------------------------
 
 const NAV_WIDTH = 280;
@@ -34,6 +35,7 @@ Nav.propTypes = {
 };
 
 export default function Nav({ openNav, onCloseNav }) {
+  const { user, account } = useContext(kpupContext)
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive('up', 'lg');
@@ -59,15 +61,15 @@ export default function Nav({ openNav, onCloseNav }) {
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none">
           <StyledAccount>
-            <Avatar src={account.photoURL} alt="photoURL" />
+            <Avatar src={'/assets/images/avatars/avatar_default.jpg'} alt="photoURL" />
 
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {user && user.name}
               </Typography>
 
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
+                {account && account.substring(0, 15)}...
               </Typography>
             </Box>
           </StyledAccount>

@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-
 // import { useNavigate } from 'react-router-dom';
 // @mui
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox, Grid, CircularProgress } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { Box } from '@mui/system';
+import successHandler from '../../../helpers/successHandler';
+import errorHandler from "../../../helpers/errorHandler"
 import AuthServices from '../../../services/AuthServices';
 // components
 import Iconify from '../../../components/iconify';
-
+import UserServices from '../../../services/UserServices';
+import { kpupContext } from '../../../context';
 // ----------------------------------------------------------------------
 
 export default function SignUpForm() {
@@ -24,6 +25,7 @@ export default function SignUpForm() {
     confirm_password: '',
     phone_no: ''
   })
+  const { token, setToken, user, setUser } = useContext(kpupContext)
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -35,11 +37,23 @@ export default function SignUpForm() {
   const handleClick = async () => {
     setLoad(true)
     await AuthServices.signup(json)
-      .then((res) => {
+      .then(async (res) => {
         console.log(res);
         localStorage.setItem("kpupToken", res.data)
+        setToken(res.data)
         setLoad(false)
-        navigate('/dashboard');
+        await UserServices.getUserDetails(res.data)
+          .then((res) => {
+            setUser(res.data)
+            localStorage.setItem("kpupUser", JSON.stringify(res.data))
+            console.log(res.data)
+            successHandler("Login Successful")
+            navigate('/dashboard');
+          })
+      })
+      .catch((e) => {
+        console.log(e)
+        errorHandler("e.message")
       })
   };
 

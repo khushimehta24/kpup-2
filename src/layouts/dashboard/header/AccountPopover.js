@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
@@ -6,8 +6,7 @@ import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover 
 // mocks_
 import account from '../../../_mock/account';
 import successHandler from '../../../helpers/successHandler';
-
-// ----------------------------------------------------------------------
+import { kpupContext } from '../../../context';
 
 const MENU_OPTIONS = [
   {
@@ -24,9 +23,9 @@ const MENU_OPTIONS = [
   },
 ];
 
-// ----------------------------------------------------------------------
-
 export default function AccountPopover() {
+  const { user } = useContext(kpupContext)
+  console.log("user", user)
   const [open, setOpen] = useState(null);
   const navigate = useNavigate()
   const handleOpen = (event) => {
@@ -84,10 +83,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {user && user.name}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {user && user.email}
           </Typography>
         </Box>
 

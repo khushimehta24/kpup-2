@@ -27,7 +27,7 @@ export default function DashboardAppPage() {
     <>
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome back
+          Hi, Welcome back to <span style={{"color" : "green" }}>LuigiMart</span>
         </Typography>
 
         <Grid container spacing={3}>
@@ -172,33 +172,13 @@ export default function DashboardAppPage() {
             <AppTrafficBySite
               title="Suggested Products"
               list={[
-                {
-                  name: 'FaceBook',
-                  value: 323234,
-                  icon: <Iconify icon={'eva:facebook-fill'} color="#1877F2" width={32} />,
-                },
-                {
-                  name: 'Google',
-                  value: 341212,
-                  icon: <Iconify icon={'eva:google-fill'} color="#DF3E30" width={32} />,
-                },
-                {
-                  name: 'Linkedin',
-                  value: 411213,
-                  icon: <Iconify icon={'eva:linkedin-fill'} color="#006097" width={32} />,
-                },
-                {
-                  name: 'Twitter',
-                  value: 443232,
-                  icon: <Iconify icon={'eva:twitter-fill'} color="#1C9CEA" width={32} />,
-                },
               ]}
             />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={8}>
+          <Grid item xs={12} md={12} lg={12}>
             <AppTasks
-              title="Tasks"
+              title="Daily Todos"
               list={[
                 { id: '1', label: 'Create FireStone Logo' },
                 { id: '2', label: 'Add SCSS and JS files if required' },

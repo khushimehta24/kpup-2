@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 // @mui
@@ -9,13 +9,15 @@ import errorHandler from "../../../helpers/errorHandler"
 import AuthServices from '../../../services/AuthServices';
 // components
 import Iconify from '../../../components/iconify';
+import UserServices from '../../../services/UserServices';
+import { kpupContext } from '../../../context';
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [load, setLoad] = useState(false)
-
+  const { token, setToken, user, setUser } = useContext(kpupContext)
   const [showPassword, setShowPassword] = useState(false);
   const [json, setJson] = useState({
     email: '',
@@ -25,12 +27,19 @@ export default function LoginForm() {
   const handleClick = async () => {
     setLoad(true)
     await AuthServices.login(json)
-      .then((res) => {
+      .then(async (res) => {
         console.log(res);
         localStorage.setItem("kpupToken", res.data)
+        setToken(res.data)
         setLoad(false)
-        successHandler("Login Successful")
-        navigate('/dashboard');
+        await UserServices.getUserDetails(res.data)
+          .then((res) => {
+            setUser(res.data)
+            localStorage.setItem("kpupUser", JSON.stringify(res.data))
+            console.log(res.data)
+            successHandler("Login Successful")
+            navigate('/dashboard');
+          })
       })
       .catch((e) => {
         console.log(e)
