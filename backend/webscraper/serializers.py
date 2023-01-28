@@ -8,11 +8,8 @@ class DepartmentSerializer(serializers.ModelSerializer):
         model = Department
         fields = ['name', 'link']
 
-class ItemsSerializer(serializers.Serializer):
-    link = serializers.URLField(max_length = 200)
-    name = serializers.CharField(max_length = 200)
-    img = serializers.CharField(max_length = 200)
-    price = serializers.CharField(max_length = 50)
+class ItemSerializer(serializers.ModelSerializer):
 
     class Meta:
+        model = Item
         fields = ['link', 'name', 'price', 'img']

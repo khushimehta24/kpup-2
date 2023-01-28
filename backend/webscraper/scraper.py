@@ -1,4 +1,3 @@
-import json
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -15,10 +14,7 @@ def scrape(url):
     htmlContent = r.content
     soup = BeautifulSoup(htmlContent, features='html.parser')
     doc = soup.find_all("div",{"class":"a-column a-span12 a-text-center _cDEzb_grid-column_2hIsc"})
-    items = dict()
     list1 = []
     for j in doc[:10]:
         list1.append({'link':'https://www.amazon.in'+j.find_all('a')[0]['href'], 'name':j.find_all('a')[1].get_text(), 'price':j.find_all('a')[3].get_text(), 'img':j.find('img')['src']})
-    items['items'] = list1
-    json_obj = json.dumps(items)
-    return items
+    return list1

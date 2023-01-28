@@ -10,17 +10,30 @@ from .scraper import scrape
 
 # Create your views here.
 
-class ItemsAPI(GenericAPIView):
+class ItemsLoadAPI(GenericAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = DepartmentSerializer
+    
+    def get_queryset(self):
+        data = self.request.data
+        serializer = DepartmentSerializer(data=data)
+        if serializer.is_valid():
+            dept = Department.objects.get(name = serializer.validated_data['name'])
+        items = Item.objects.filter(dept=dept)
+        return items
 
     def post(self, request, *args, **kwargs):
         data = request.data
-        serializer = self.serializer_class(data=data)
+        serializer = DepartmentSerializer(data=data)
         if serializer.is_valid():
-            url = Department.objects.get(name = serializer.validated_data['name']).link
+            dept = Department.objects.get(name = serializer.validated_data['name'])
+            url = dept.link
             items = scrape(url)
-            ItemsSerializer(items)
+            for i in items:
+                serializer2 = ItemSerializer(data=i)
+                if serializer2.is_valid():
+                    item = Item.objects.create(dept = dept, link = i['link'], name= i['name'], price= i['price'], img= i['img'])
+                    print(item)
             return Response(items, status= status.HTTP_200_OK)
 
 class DepartmentAPI(ListAPIView):
@@ -31,4 +44,21 @@ class DepartmentAPI(ListAPIView):
         queryset = Department.objects.all()
         return queryset
 
+
+class ItemsAPI(GenericAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = DepartmentSerializer
+    
+    def get_queryset(self):
+        data = self.request.data
+        serializer = DepartmentSerializer(data=data)
+        if serializer.is_valid():
+            dept = Department.objects.get(name = serializer.validated_data['name'])
+        items = Item.objects.filter(dept=dept)
+        return items
+
+    def post(self, request, *args, **kwargs):
+        items = self.get_queryset()
+        serializer = ItemSerializer(items, many=True)
+        return Response(serializer.data, status= status.HTTP_200_OK)
 
