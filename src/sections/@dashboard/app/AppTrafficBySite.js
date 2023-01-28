@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 // @mui
 import PropTypes from 'prop-types';
-import { Box, Card, Paper, Typography, CardHeader, CardContent, InputLabel, MenuItem, Select } from '@mui/material';
-// utils
+import { Box, Card, Paper, Typography, CardHeader, CardContent, InputLabel, MenuItem, Select, CardMedia } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { fShortenNumber } from '../../../utils/formatNumber';
 import SuggestedProducts from '../../../services/SuggestedProducts';
+import SuggestedProductsCard from './SuggestedProductsCard';
+// import errorHandler from "../../../helpers/errorHandler"
+import spinner from "../../../images/marioloader.gif"
 // ----------------------------------------------------------------------
 
 AppTrafficBySite.propTypes = {
@@ -13,11 +16,20 @@ AppTrafficBySite.propTypes = {
   list: PropTypes.array.isRequired,
 };
 
-
-
 export default function AppTrafficBySite({ title, subheader, list, ...other }) {
+
+  const StyledProductImg = styled('img')({
+    top: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    position: 'absolute',
+  });
+
   const [categoryList, setCategoryList] = useState([])
   const [categoryValue, setCategoryValue] = useState(1)
+  const [categoryItems, setCategoryItems] = useState(null)
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     SuggestedProducts.getCategoryList()
       .then((res) => {
@@ -26,53 +38,70 @@ export default function AppTrafficBySite({ title, subheader, list, ...other }) {
           item.name
         )
         setCategoryList(final)
+
       })
 
   }, [])
 
+  useEffect(() => {
+    setLoading(true)
+    SuggestedProducts.getCategoryItems(categoryList[categoryValue]).then((res) => {
+      console.log(res.data)
+      setCategoryItems(res.data)
+      setLoading(false)
+    }).catch((e) => {
+      // errorHandler(e.message)
+      console.log(e.message)
+    }
+    )
+
+  }, [categoryValue, categoryList])
+
   return (
-    <Card sx={{ width: '100%' }} {...other}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignContent: 'center' }}>
-        <CardHeader title={title} subheader={subheader} />
-        <Box>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={categoryValue}
-            label="Age"
-            onChange={(e) => setCategoryValue(e.target.value)}
-          >
-            {
-              categoryList.map((item, key) => (
-                <MenuItem key={key} value={key}>{item}</MenuItem>
-              ))
-            }
-          </Select>
+    <>
+      <Card sx={{ width: '100%' }} {...other}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignContent: 'center' }}>
+          <CardHeader title={title} subheader={subheader} />
+          <Box sx={{ paddingRight: 3, paddingTop: 3 }}>
+            <Select
+              id="demo-simple-select"
+              value={categoryValue}
+              onChange={(e) => setCategoryValue(e.target.value)}
+            >
+              {
+                categoryList.map((item, key) => (
+                  <MenuItem key={key} value={key}>{item}</MenuItem>
+                ))
+              }
+            </Select>
+          </Box>
         </Box>
-      </Box>
 
 
-      <CardContent>
-        <Box
-          sx={{
-            display: 'grid',
-            gap: 2,
-            gridTemplateColumns: 'repeat(2, 1fr)',
-          }}
-        >
-          {list.map((site) => (
-            <Paper key={site.name} variant="outlined" sx={{ py: 2.5, textAlign: 'center' }}>
-              <Box sx={{ mb: 0.5 }}>{site.icon}</Box>
-
-              <Typography variant="h6">{fShortenNumber(site.value)}</Typography>
-
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {site.name}
-              </Typography>
-            </Paper>
-          ))}
-        </Box>
-      </CardContent>
-    </Card>
+        <CardContent>
+          {loading ?
+            <>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <CardMedia component="img" image={spinner} sx={{ height: "200px", width: "200px" }} />
+              </Box>
+            </>
+            :
+            <>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gap: 2,
+                  gridTemplateColumns: { md: 'repeat(4, 1fr)', sm: 'repeat(2, 1fr)' },
+                }}
+              >
+                {categoryItems?.map((item) => (
+                  <>
+                    <SuggestedProductsCard name={item.name} cover={item.img} />
+                  </>
+                ))}
+              </Box></>}
+        </CardContent>
+      </Card>
+    </>
   );
 }
