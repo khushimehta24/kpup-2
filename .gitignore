@@ -1,6 +1,7 @@
 *.pyc
 _pycache_/
 db.sqlite3
+
 # Environments
 virtualenv/
 *.env
@@ -11,3 +12,4 @@ ENV/
 media/
 .ipynb_checkpoints/
 *.json
+Fruit_data/

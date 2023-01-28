@@ -40,5 +40,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('webscraper/', include('webscraper.urls')),
     path('warehouse/', include('warehouse.urls')),
+    path('image_detect/', include('fruits.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

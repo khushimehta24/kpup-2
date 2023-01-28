@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'accounts',
     'webscraper',
     'warehouse',
+    'fruits',
 ]
 
 MIDDLEWARE = [
