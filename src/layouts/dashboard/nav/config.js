@@ -27,15 +27,20 @@ const navConfig = [
     icon: icon('ic_blog'),
   },
   {
-    title: 'scanbarcode',
+    title: 'Scan Barcode',
     path: '/dashboard/scanbarcode',
     icon: icon('ic_scan')
+  },
+  {
+    title: 'Upload CSV',
+    path: '/dashboard/uploadcsv',
+    icon: icon("ic_scan")
   },
   {
     title: 'schedule',
     path: '/dashboard/schedule',
     icon: icon('ic_scan')
-  }
+  },
 ];
 
 export default navConfig;

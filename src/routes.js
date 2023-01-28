@@ -12,8 +12,9 @@ import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import BarcodePage from './pages/BarcodePage';
+import UploadCSV from './sections/@dashboard/csvupload/UploadCSV'
 import Kanban from "./pages/Kanban"
-// ----------------------------------------------------------------------
+
 
 export default function Router() {
   const routes = useRoutes([
@@ -27,8 +28,8 @@ export default function Router() {
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
         { path: 'scanbarcode', element: <BarcodePage /> },
+        { path: 'uploadcsv', element: <UploadCSV /> },
         { path: 'schedule', element: <Kanban /> },
-
       ],
     },
     {
