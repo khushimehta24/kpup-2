@@ -30,6 +30,11 @@ const navConfig = [
     title: 'scanbarcode',
     path: '/dashboard/scanbarcode',
     icon: icon('ic_scan')
+  },
+  {
+    title: 'schedule',
+    path: '/dashboard/schedule',
+    icon: icon('ic_scan')
   }
 ];
 
