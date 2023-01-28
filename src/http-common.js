@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 export default axios.create({
-    baseURL: "https://kpup.pythonanywhere.com/accounts",
+    baseURL: "https://kpup.pythonanywhere.com",
 
     headers: {
         "Content-type": "application/json",

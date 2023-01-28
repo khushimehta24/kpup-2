@@ -168,9 +168,9 @@ export default function DashboardAppPage() {
             />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={12} lg={12}>
             <AppTrafficBySite
-              title="Traffic by Site"
+              title="Suggested Products"
               list={[
                 {
                   name: 'FaceBook',

@@ -20,6 +20,11 @@
       "react-app"
     ]
   },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "babel": {
     "presets": [
       "@babel/preset-react"
@@ -48,6 +53,7 @@
     "axios": "^1.2.5",
     "change-case": "^4.1.2",
     "date-fns": "^2.29.3",
+    "firebase": "^9.16.0",
     "fs": "^0.0.1-security",
     "history": "^5.3.0",
     "lodash": "^4.17.21",
@@ -63,6 +69,7 @@
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.1",
     "simplebar-react": "^2.4.3",
+    "uuid": "^9.0.0",
     "web-vitals": "^3.0.3"
   },
   "devDependencies": {
