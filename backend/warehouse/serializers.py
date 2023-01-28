@@ -11,7 +11,7 @@ class CostCountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CostCount
-        fields = ['id','cost_price', 'selling_price', 'count']
+        fields = ['id','cost_price', 'selling', 'count', 'sold_count']
 
 class StorageItemPostSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
@@ -19,7 +19,7 @@ class StorageItemPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = StorageItem
-        fields = ['id','name', 'img', 'desc', 'added_date', 'expiry_date', 'category', 'costcount']
+        fields = ['id','name', 'img', 'desc', 'added_date', 'expiry_date', 'category', 'costcount', 'threshold', 'restock']
 
     def create(self, validated_data, user):
         costcount_data = validated_data.pop('costcount')
@@ -43,13 +43,15 @@ class StorageItemPostSerializer(serializers.ModelSerializer):
             storage_item.added_date = validated_data['added_date']
         if validated_data['expiry_date']: 
             storage_item.expiry_date = validated_data['expiry_date']
+        if validated_data['threshold']: 
+            storage_item.expiry_date = validated_data['threshold']
         storage_item.save()
         for costcount in costcount_data:
             obj = CostCount.objects.get(id = costcount['id'])
             if costcount['cost_price']:
                 obj.cost_price = costcount['cost_price']
-            if costcount['selling_price']:
-                obj.selling_price = costcount['selling_price']
+            if costcount['selling']:
+                obj.selling_price = costcount['selling']
             if costcount['count']:
                 obj.count = costcount['count']
             obj.save()

@@ -13,9 +13,12 @@ class StorageItem(models.Model):
     expiry_date = models.DateField(null=True, blank=True)
     category = models.ForeignKey(Department, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    threshold = models.CharField(max_length=50, default="0")
+    restock = models.BooleanField(default=False)
 
 class CostCount(models.Model):
     item = models.ForeignKey(StorageItem, on_delete=models.CASCADE)
     cost_price = models.CharField(max_length=200)
-    selling_price = models.CharField(max_length=200, blank=True, default='')
+    selling = models.CharField(max_length=200, blank=True, default='')
     count = models.IntegerField(default=0)
+    sold_count = models.IntegerField(default=0)
