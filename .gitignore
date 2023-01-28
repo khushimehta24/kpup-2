@@ -13,5 +13,3 @@ media/
 .ipynb_checkpoints/
 *.json
 Fruit_data/
-runs/
-fruits/
