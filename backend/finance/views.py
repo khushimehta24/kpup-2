@@ -39,7 +39,7 @@ class GraphAPI(GenericAPIView):
         total_spending['data'] = data2
         total_profit['data'] = data3
         response = {"response":[total_sale, total_spending, total_profit]}
-        return JsonResponse( status= status.HTTP_200_OK)
+        return JsonResponse(data = response, status= status.HTTP_200_OK)
 
 
 
