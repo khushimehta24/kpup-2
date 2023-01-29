@@ -10,6 +10,16 @@ const addProducts = async (data, token) => {
     return res
 };
 
+const getProducts = async (token) => {
+    const res = await httpCommon.get(`/warehouse/item-list/`, {
+        headers: {
+            'Authorization': `Token ${token}`,
+            'Content-Type': 'application/json'
+        }
+    });
+    return res
+};
+
 export default {
-    addProducts
+    addProducts, getProducts
 }

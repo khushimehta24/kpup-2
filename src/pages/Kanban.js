@@ -6,37 +6,53 @@ import ScheduleService from "../services/ScheduleService"
 import '../Body.css'
 import { kpupContext } from "../context";
 
-const board = {
-    columns: [
-        {
-            id: 1,
-            title: "Restock",
-            cards: []
-        },
-        {
-            id: 2,
-            title: "Dispatch",
-            cards: []
-        },
-        {
-            id: 3,
-            title: "Done",
-            cards: []
-        },
-    ]
-};
 
 
 
 
 function UncontrolledBoard() {
+
     const { token } = useContext(kpupContext)
+    const [board, setBoard] = useState({
+        columns: [
+            {
+                id: 1,
+                title: "Restock",
+                cards: []
+            },
+            {
+                id: 2,
+                title: "Dispatch",
+                cards: []
+            },
+            {
+                id: 3,
+                title: "Done",
+                cards: []
+            },
+        ]
+    })
+
     useEffect(() => {
-        ScheduleService.postSchedule(board, token)
-            .then((res) => {
-                console.log(res);
-            })
-    },)
+        const call = () => {
+            ScheduleService.getSchedule(token)
+                .then((res) => {
+                    console.log(res)
+                    setBoard(res.data)
+                })
+        }
+        call();
+    }, [board])
+    useEffect(() => {
+        const call = async () => {
+            await ScheduleService.postSchedule(board, token)
+                .then((res) => {
+                    console.log("post", res);
+                })
+        }
+
+        call();
+    }, [board])
 
     return (
         <Board

@@ -1,17 +1,31 @@
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 // @mui
 import { Container, Stack, Typography, Button } from '@mui/material';
 import Iconify from '../components/iconify';
 // components
 import { ProductSort, ProductList, ProductFilterSidebar } from '../sections/@dashboard/products';
 // mock
-import PRODUCTS from '../_mock/products';
+import ProductService from "../services/ProductServices"
+import { kpupContext } from '../context';
 
 // ----------------------------------------------------------------------
 
 export default function ProductsPage() {
+  const { token } = useContext(kpupContext)
   const [openFilter, setOpenFilter] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const call = async () => {
+      await ProductService.getProducts(token)
+        .then((res) => {
+          console.log(res.data.response)
+          setProducts(res.data.response)
+        })
+    }
+    call();
+  })
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -45,7 +59,7 @@ export default function ProductsPage() {
           </Stack>
         </Stack>
 
-        <ProductList products={PRODUCTS} />
+        <ProductList products={products && products} />
         {/* <ProductCartWidget /> */}
       </Container>
     </>
