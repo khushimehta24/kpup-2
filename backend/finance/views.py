@@ -3,21 +3,21 @@ from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework import status, permissions
 from .serializers import *
 from django.http.response import JsonResponse
-from backend.warehouse.models import *
+from warehouse.models import *
 from backend.webscraper.models import *
 
 # Create your views here.
-class TopStatsAPI(GenericAPIView):
+class GraphAPI(GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = TopStatsSerializer
 
     def get(self, request):
         storage_items = StorageItem.objects.filter(user = self.request.user)
         categories = Department.objects.all()
-        total_sale = {}
-        total_spending = {}
-        profit = {}
+        total_sale = {"name":"sale"}
+        total_spending = {"name":"spending"}
+        profit = {"name":"profit"}
         for category in categories:
+            data1, data2, data3 = [], [], []
             sale,spending, profit = 0,0,0
             storage_items.filter(dept = category)
             for item in storage_items:
@@ -25,9 +25,11 @@ class TopStatsAPI(GenericAPIView):
                 for cc in costcounts:
                     sale += cc.sold_count*int(cc.selling)
                     spending += (cc.sold_count+cc.count)*int(cc.cost_price)
-            total_sale[category.name] = sale
-            total_spending[category.name] = spending
-            profit[category.name] = profit
+            
+        total_sale['data']
+        total_spending[category.name] = spending
+        profit[category.name] = profit
+        return JsonResponse({"total_sale":""})
 
 
 
