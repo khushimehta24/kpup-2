@@ -62,7 +62,7 @@ export default function LoginPage() {
 
                         <Typography variant="body2" sx={{ mb: 5 }}>
                             Don’t have an account? {''}
-                            <Link variant="subtitle2" sx={{ cursor: 'pointer' }} onClick={() => navigate('/signup')}>Get started</Link>
+                            <Link sx={{ color: "#00A73C" }} variant="subtitle2" sx={{ cursor: 'pointer' }} onClick={() => navigate('/signup')}>Get started</Link>
                         </Typography>
                         <LoginForm />
                     </StyledContent>

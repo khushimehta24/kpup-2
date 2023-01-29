@@ -19,7 +19,7 @@ export default function AppWebsiteVisits({ title, subheader, chartLabels, chartD
     plotOptions: { bar: { columnWidth: '16%' } },
     fill: { type: chartData.map((i) => i.fill) },
     labels: chartLabels,
-    xaxis: { type: 'datetime' },
+    xaxis: { type: 'string' },
     tooltip: {
       shared: true,
       intersect: false,
@@ -35,7 +35,7 @@ export default function AppWebsiteVisits({ title, subheader, chartLabels, chartD
   });
 
   return (
-    <Card {...other}>
+    <Card sx={{ height: "100%" }} {...other}>
       <CardHeader title={title} subheader={subheader} />
 
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
