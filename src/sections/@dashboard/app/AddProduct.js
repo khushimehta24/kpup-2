@@ -127,13 +127,13 @@ function AddProduct({ img, json, setJson }) {
         <>
             <Grid item container sx={{ overflow: 'scroll', "&::-webkit-scrollbar": { display: 'none' } }} >
                 <Grid item md={12} />
-                <Grid container columnSpacing={3} >
+                <Grid container columnSpacing={3} sx={{ marginTop: '2%' }}>
                     <Grid item md={6} xs={12}>
                         <p style={{ fontSize: '12px' }}>Product Name</p>
                         <TextField required value={json.name} sx={textField} name='name' placeholder='Enter Product Name' id='name' onChange={handleChange} />
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        <p style={{ fontSize: '12px', marginTop: '3%' }}>Category</p>
+                        <p style={{ fontSize: '12px', marginTop: '2%' }}>Category</p>
                         <Select
                             id="demo-simple-select"
                             value={categoryValue}

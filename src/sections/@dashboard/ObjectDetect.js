@@ -71,6 +71,19 @@ function ObjectDetect() {
             .then((res) => {
                 console.log(res);
                 setLoading(false)
+                setJson({
+                    'id': new Date().getTime().toString(),
+                    'name': '',
+                    'desc': '',
+                    'img': '',
+                    "threshold": "40",
+                    "restock": false,
+                    'expiry_date': '',
+                    'category': {
+                        'name': ''
+                    },
+                    'costcount': (Array(Number(1)).fill("")),
+                })
                 successHandler('Product Successfully added')
             })
     }

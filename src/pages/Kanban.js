@@ -28,6 +28,7 @@ const board = {
 
 
 
+
 function UncontrolledBoard() {
     const { token } = useContext(kpupContext)
     useEffect(() => {

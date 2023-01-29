@@ -41,7 +41,7 @@ export default function DashboardLayout() {
   const navigate = useNavigate()
   const commands = [
     {
-      command: 'go to dashboard',
+      command: 'go to *',
       callback: (navigateto) => {
         navigate(`/dashboard/${navigateto}`)
       },
