@@ -111,12 +111,12 @@ export default function SignUpForm() {
 
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
         <Checkbox name="remember" label="Remember me" />
-        <Link variant="subtitle2" underline="hover">
+        <Link variant="subtitle2" sx={{ color: "#00A73C" }} underline="hover">
           Keep me signed in
         </Link>
       </Stack>
 
-      {!load ? <LoadingButton onClick={handleClick} fullWidth size="large" type="submit" variant="contained">
+      {!load ? <LoadingButton onClick={handleClick} sx={{ backgroundColor: "#00A73C" }} fullWidth size="large" type="submit" variant="contained">
         Sign Up
       </LoadingButton> : <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <CircularProgress sx={{ backgroundColor: '#00A73C', color: 'white', padding: '5px', borderRadius: '50%' }} />

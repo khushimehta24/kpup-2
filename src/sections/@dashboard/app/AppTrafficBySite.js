@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 // @mui
 import PropTypes from 'prop-types';
 import { Box, Card, Paper, Typography, CardHeader, CardContent, InputLabel, MenuItem, Select, CardMedia } from '@mui/material';
@@ -9,6 +9,7 @@ import SuggestedProductsCard from './SuggestedProductsCard';
 // import errorHandler from "../../../helpers/errorHandler"
 import spinner from "../../../images/marioloader.gif"
 import Loader from '../../../helpers/Loader';
+import { kpupContext } from '../../../context';
 // ----------------------------------------------------------------------
 
 AppTrafficBySite.propTypes = {
@@ -18,6 +19,8 @@ AppTrafficBySite.propTypes = {
 };
 
 export default function AppTrafficBySite({ title, subheader, list, ...other }) {
+
+  const { setCategory } = useContext(kpupContext)
 
   const StyledProductImg = styled('img')({
     top: 0,
@@ -39,11 +42,11 @@ export default function AppTrafficBySite({ title, subheader, list, ...other }) {
           item.name
         )
         setCategoryList(final)
-
+        setCategory(final)
       })
 
   }, [])
-
+  console.log(categoryList)
   useEffect(() => {
     setLoading(true)
     SuggestedProducts.getCategoryItems(categoryList[categoryValue]).then((res) => {
