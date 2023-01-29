@@ -25,11 +25,13 @@ class GraphAPI(GenericAPIView):
                 for cc in costcounts:
                     sale += cc.sold_count*int(cc.selling)
                     spending += (cc.sold_count+cc.count)*int(cc.cost_price)
-            
-        total_sale['data']
-        total_spending[category.name] = spending
-        profit[category.name] = profit
-        return JsonResponse({"total_sale":""})
+            data1.append(sale)
+            data2.append(spending)
+            data3.append(profit)
+        total_sale['data'] = data1
+        total_spending['data'] = data2
+        profit['data'] = data3
+        return JsonResponse({[total_sale, total_spending, profit]})
 
 
 
