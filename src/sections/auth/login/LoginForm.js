@@ -87,7 +87,7 @@ export default function LoginForm() {
       {!load ? <LoadingButton onClick={handleClick} fullWidth size="large" type="submit" variant="contained">
         Login
       </LoadingButton> : <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <CircularProgress sx={{ backgroundColor: '#2065D1', color: 'white', padding: '5px', borderRadius: '50%' }} />
+        <CircularProgress sx={{ backgroundColor: '#00A73C', color: 'white', padding: '5px', borderRadius: '50%' }} />
       </Box>}
     </>
   );

@@ -3,7 +3,7 @@ import UploadCSV from '../sections/@dashboard/csvupload/UploadCSV';
 
 const CSVUploadPage = () => {
   return (
-        <UploadCSV/>
+    <UploadCSV />
   )
 }
 

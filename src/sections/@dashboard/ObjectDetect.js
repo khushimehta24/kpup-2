@@ -10,23 +10,24 @@ import {
     listAll,
     list,
 } from "firebase/storage";
-import { storage } from "../../../firebase/config"
-import BarcodeService from '../../../services/BarcodeService';
-import AddProduct from '../app/AddProduct';
-import Loader from '../../../helpers/Loader';
-import ProductServices from '../../../services/ProductServices';
-import { kpupContext } from '../../../context';
+import { storage } from "../../firebase/config"
+import AddProduct from './app/AddProduct';
+import Loader from '../../helpers/Loader';
+import ObjectDetectionServices from '../../services/ObjectDetectionServices';
+import ProductServices from '../../services/ProductServices';
+import { kpupContext } from '../../context';
 
 const AddBtn = {
     color: 'white', background: '#00A73C',
     fontFamily: 'Poppins', padding: '0px 2.6%'
 }
-function UploadImg() {
-    const { token } = useContext(kpupContext)
+function ObjectDetect() {
+
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
     const [editSinglePerson, setEditSinglePerson] = useState('Add');
     const [load, setLoad] = useState(false)
+    const { token } = useContext(kpupContext)
     const [json, setJson] = useState({
         'name': '',
         'desc': '',
@@ -44,41 +45,25 @@ function UploadImg() {
         if (imageUpload == null) return;
         const imageRef = ref(storage, `images/${imageUpload.name} + ${uuidv4()}`);
         uploadBytes(imageRef, imageUpload).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
+            getDownloadURL(snapshot.ref).then(async (url) => {
                 setImageUrls(url);
                 console.log(url);
-                getImageFileObject(url);
+                const form2Data = new FormData()
+                form2Data.append('link', url);
+                await ObjectDetectionServices.getObject(form2Data)
+                    .then((res) => {
+                        // console.log(res.data.response.name)
+                        setJson({ ...json, 'name': res.data.response.name[0], 'img': url })
+                        setLoad(false)
+                    })
             });
         });
     };
 
-    async function getImageFileObject(img) {
-        const form2Data = new FormData()
-        form2Data.append('linkFile', img);
-        await BarcodeService.getBarcode(form2Data)
-            .then(async (res) => {
-                console.log(res);
-                await BarcodeService.getBarcodeDetails(res.data.data[0].allFields[0].fieldValue)
-                    .then((res) => {
-                        setJson({ ...json, 'name': res.data.products[0].title, 'img': res.data.products[0].images[0], 'desc': res.data.products[0].description })
-                        setLoad(false)
-
-                    })
-            })
-            .catch((e) => {
-                console.log(e)
-            })
-        // const res = await IpfsServices.uploadImg(form2Data, token)
-        // setJson({ ...json, bannerUri: res.data.urls[0] })
-        // console.log(res.data.urls[0])
-        // setImgLoad(false)
-    }
-    function runAfterImageDelete(file) {
-        console.log({ file })
-    }
     const addProduct = async () => {
         await ProductServices.addProducts(json, token)
     }
+
     // useEffect(() => {
     //     listAll(imagesListRef).then((response) => {
     //         response.items.forEach((item) => {
@@ -114,7 +99,6 @@ function UploadImg() {
 
             </Grid>}
             <Button onClick={addProduct} sx={{ textTransform: 'none', height: '3rem', marginTop: '3%', width: '100%', ...AddBtn }} > Add Product</Button>
-
             {/* <input
                 type="file"
                 onChange={(event) => {
@@ -126,4 +110,4 @@ function UploadImg() {
     )
 }
 
-export default UploadImg
+export default ObjectDetect

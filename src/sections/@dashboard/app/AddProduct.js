@@ -24,7 +24,7 @@ import BarcodeService from '../../../services/BarcodeService';
 import SuggestedProducts from '../../../services/SuggestedProducts';
 
 const AddBtn = {
-    color: 'white', height: '80%', alignItems: 'center', background: '#2065D1',
+    color: 'white', height: '80%', alignItems: 'center', background: '#00A73C',
     fontFamily: 'Poppins',
 }
 const textField = { width: '100%' };
@@ -32,7 +32,7 @@ const textField = { width: '100%' };
 function AddProduct({ img, json, setJson }) {
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
-            background: '#2065D1',
+            background: '#00A73C',
             color: theme.palette.common.white,
         },
         [`&.${tableCellClasses.body}`]: {
@@ -125,7 +125,7 @@ function AddProduct({ img, json, setJson }) {
     }
     return (
         <>
-            <Grid item container md={8} sx={{ overflow: 'scroll', "&::-webkit-scrollbar": { display: 'none' } }} >
+            <Grid item container sx={{ overflow: 'scroll', "&::-webkit-scrollbar": { display: 'none' } }} >
                 <Grid item md={12} />
                 <Grid container columnSpacing={3} >
                     <Grid item md={6} xs={12}>
@@ -137,7 +137,11 @@ function AddProduct({ img, json, setJson }) {
                         <Select
                             id="demo-simple-select"
                             value={categoryValue}
-                            onChange={(e) => setCategoryValue(e.target.value)}
+                            onChange={(e) => setJson({
+                                ...json, 'category': {
+                                    'name': categoryList[e.target.value]
+                                }
+                            })}
                             sx={{ width: '100%' }}
                         >
                             {
@@ -196,8 +200,8 @@ function AddProduct({ img, json, setJson }) {
                                             <StyledTableCell component="th" scope="row">
                                                 {costCount.cost}
                                             </StyledTableCell>
-                                            <StyledTableCell align='right'>{costCount.selling}</StyledTableCell>
                                             <StyledTableCell align='right'>{costCount.count}</StyledTableCell>
+                                            <StyledTableCell align='right'>{costCount.selling}</StyledTableCell>
                                             <StyledTableCell align="right">
                                                 <Grid container style={{ display: 'flex', columnGap: '2%', justifyContent: 'flex-end' }}>
 

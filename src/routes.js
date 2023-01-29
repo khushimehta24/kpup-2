@@ -14,6 +14,7 @@ import DashboardAppPage from './pages/DashboardAppPage';
 import BarcodePage from './pages/BarcodePage';
 import CSVUploadPage from './pages/CSVUploadPage';
 import Kanban from "./pages/Kanban"
+import LabTabs from './sections/@dashboard/tabs/Tabs';
 
 
 export default function Router() {
@@ -27,7 +28,7 @@ export default function Router() {
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
-        { path: 'scanbarcode', element: <BarcodePage /> },
+        { path: 'scanbarcode', element: <LabTabs /> },
         { path: 'uploadcsv', element: <CSVUploadPage /> },
         { path: 'schedule', element: <Kanban /> },
       ],
