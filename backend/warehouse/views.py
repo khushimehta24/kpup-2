@@ -29,6 +29,7 @@ class ItemGetAPI(GenericAPIView):
     def get(self, request):
         storage_items = StorageItem.objects.filter(user = self.request.user)
         data = self.serializer_class(storage_items, many=True).data
+        print(data)
         return JsonResponse({"response" : data}, status= status.HTTP_200_OK)
         
 
