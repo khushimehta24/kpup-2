@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField } from '@mui/material'
+import { Box, Button, CircularProgress, Grid, TextField } from '@mui/material'
 import React, { useState, useEffect, useContext } from 'react'
 import ImageUploader from 'react-image-upload'
 import { v4 as uuidv4 } from 'uuid';
@@ -16,6 +16,7 @@ import Loader from '../../helpers/Loader';
 import ObjectDetectionServices from '../../services/ObjectDetectionServices';
 import ProductServices from '../../services/ProductServices';
 import { kpupContext } from '../../context';
+import successHandler from '../../helpers/successHandler';
 
 const AddBtn = {
     color: 'white', background: '#00A73C',
@@ -27,12 +28,12 @@ function ObjectDetect() {
     const [imageUrls, setImageUrls] = useState([]);
     const [editSinglePerson, setEditSinglePerson] = useState('Add');
     const [load, setLoad] = useState(false)
+    const [loading, setLoading] = useState(false)
     const { token } = useContext(kpupContext)
     const [json, setJson] = useState({
         'name': '',
         'desc': '',
         'img': '',
-        'added_date': new Date(),
         'expiry_date': '',
         'category': {
             'name': ''
@@ -61,7 +62,17 @@ function ObjectDetect() {
     };
 
     const addProduct = async () => {
-        await ProductServices.addProducts(json, token)
+        setLoading(true)
+        // setTimeout(() => {
+        //     successHandler('Product Successfully added')
+        //     setLoading(false)
+        // }, 5000);
+        await ProductServices.addProducts(json, localStorage.getItem('kpupToken'))
+            .then((res) => {
+                console.log(res);
+                setLoading(false)
+                successHandler('Product Successfully added')
+            })
     }
 
     // useEffect(() => {
@@ -98,7 +109,9 @@ function ObjectDetect() {
                 <Loader />
 
             </Grid>}
-            <Button onClick={addProduct} sx={{ textTransform: 'none', height: '3rem', marginTop: '3%', width: '100%', ...AddBtn }} > Add Product</Button>
+            {!loading ? <Button onClick={addProduct} sx={{ textTransform: 'none', height: '3rem', marginTop: '3%', width: '100%', border: '2px solid #00A73C', '&:hover': { border: '2px solid #00A73C !important', backgroundColor: 'white !important', color: '#00A73C !important' }, ...AddBtn }} > Add Product</Button> : <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress sx={{ backgroundColor: '#00A73C', color: 'white', padding: '5px', borderRadius: '50%' }} />
+            </Box>}
             {/* <input
                 type="file"
                 onChange={(event) => {
