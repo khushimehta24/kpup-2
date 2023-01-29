@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import * 
 
-class GraphSerializer(serializers.Serializer):
+class GetSetGoSerializer(serializers.Serializer):
     response = serializers.JSONField()
 
     class Meta:

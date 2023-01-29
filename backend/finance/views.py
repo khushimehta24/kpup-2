@@ -8,19 +8,16 @@ from warehouse.models import *
 from webscraper.models import *
 
 # Create your views here.
-class GraphAPI(GenericAPIView):
+class GetSetGoAPI(GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = GraphSerializer
+    serializer_class = GetSetGoSerializer
 
     def get(self, request):
         storage_items = StorageItem.objects.filter(user = self.request.user)
         categories = Department.objects.all()
-        total_sale = {"name":"sale"}
-        total_spending = {"name":"spending"}
-        total_profit = {"name":"profit"}
+        data1, data2= [], []
         for category in categories:
-            data1, data2, data3 = [], [], []
-            sale,spending= 0,0
+            sale,spending, sold_count= 0,0,0
             storage_items.filter(category = category)
             for item in storage_items:
                 costcounts = CostCount.objects.filter(item = item)
@@ -30,15 +27,18 @@ class GraphAPI(GenericAPIView):
                     sale += cc.sold_count*int(cc.selling)
                     if cc.cost_price== '':
                         cc.cost_price = '0'
+                    sold_count += cc.sold_count
                     spending += (cc.sold_count+cc.count)*int(cc.cost_price)
-            data1.append({"value":sale})
-            data2.append({"value":spending})
             profit = sale-spending
-            data3.append({"value":profit})
-        total_sale['data'] = data1
-        total_spending['data'] = data2
-        total_profit['data'] = data3
-        response = {"response":[total_sale, total_spending, total_profit]}
+            data1.append(profit)
+            data2.append(sold_count)
+
+        total_profit = sum(data1)
+        total_sold_count = sum(sold_count)
+
+        score = total_profit/total_sold_count
+
+        response = {"score":score}
         return JsonResponse(data = response, status= status.HTTP_200_OK)
 
 

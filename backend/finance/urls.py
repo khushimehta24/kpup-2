@@ -2,6 +2,6 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('graph/', GraphAPI.as_view(), name = 'graph'),
+    path('graph/', GetSetGoAPI.as_view(), name = 'graph'),
     
 ]
