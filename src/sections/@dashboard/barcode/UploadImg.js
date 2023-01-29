@@ -16,6 +16,7 @@ import AddProduct from '../app/AddProduct';
 import Loader from '../../../helpers/Loader';
 import ProductServices from '../../../services/ProductServices';
 import { kpupContext } from '../../../context';
+import successHandler from '../../../helpers/successHandler';
 
 const AddBtn = {
     color: 'white', background: '#00A73C',
@@ -27,6 +28,7 @@ function UploadImg() {
     const [imageUrls, setImageUrls] = useState([]);
     const [editSinglePerson, setEditSinglePerson] = useState('Add');
     const [load, setLoad] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [json, setJson] = useState({
         'id': new Date().getTime().toString(),
         'name': '',
@@ -79,9 +81,12 @@ function UploadImg() {
         console.log({ file })
     }
     const addProduct = async () => {
-        await ProductServices.addProducts(json, localStorage.getItem("kpupToken"))
+        setLoading(true)
+        await ProductServices.addProducts(json, localStorage.getItem('kpupToken'))
             .then((res) => {
-                console.log(res)
+                console.log(res);
+                setLoading(false)
+                successHandler('Product Successfully added')
             })
     }
     // useEffect(() => {
