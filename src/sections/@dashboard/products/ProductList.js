@@ -59,8 +59,8 @@ export default function ProductList({ products, ...other }) {
 
                 </Box>
               </Link>
-              <Typography variant='body2'>
-                {product.desc.substring(0, 30)}
+              <Typography variant='body2' >
+                {product.desc.substring(0, 60)}...
               </Typography>
 
               <Stack direction="row" alignItems="center" justifyContent="space-between">

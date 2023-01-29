@@ -25,7 +25,7 @@ export default function ProductsPage() {
         })
     }
     call();
-  })
+  }, [])
 
   const handleOpenFilter = () => {
     setOpenFilter(true);

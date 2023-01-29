@@ -1,6 +1,7 @@
 // @mui
 import PropTypes from 'prop-types';
 import { Box, Stack, Link, Card, Button, Divider, Typography, CardHeader } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 // utils
 import { fToNow } from '../../../utils/formatTime';
 // components
@@ -16,6 +17,7 @@ AppNewsUpdate.propTypes = {
 };
 
 export default function AppNewsUpdate({ title, subheader, list, ...other }) {
+  const navigate = useNavigate()
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -31,7 +33,7 @@ export default function AppNewsUpdate({ title, subheader, list, ...other }) {
       <Divider />
 
       <Box sx={{ p: 2, textAlign: 'right' }}>
-        <Button size="small" color="inherit" endIcon={<Iconify icon={'eva:arrow-ios-forward-fill'} />}>
+        <Button onClick={() => navigate('/dashboard/products')} size="small" color="inherit" endIcon={<Iconify icon={'eva:arrow-ios-forward-fill'} />}>
           View all
         </Button>
       </Box>
@@ -68,7 +70,7 @@ function NewsItem({ news }) {
       </Box>
 
       <Typography variant="caption" sx={{ pr: 3, flexShrink: 0, color: 'text.secondary' }}>
-        {fToNow(postedAt)}
+        {postedAt} units
       </Typography>
     </Stack>
   );

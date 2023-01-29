@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async';
 import { faker } from '@faker-js/faker';
 // @mui
@@ -19,12 +19,24 @@ import {
   AppConversionRates,
 } from '../sections/@dashboard/app';
 import { kpupContext } from '../context';
+import ProductServices from '../services/ProductServices';
 
-// ----------------------------------------------------------------------
 
 export default function DashboardAppPage() {
   const { category } = useContext(kpupContext)
   const theme = useTheme();
+  const [products, setProducts] = useState([])
+  const { token } = useContext(kpupContext)
+  useEffect(() => {
+    const call = async () => {
+      await ProductServices.getProducts(token)
+        .then((res) => {
+          console.log(res.data.response)
+          setProducts(res.data.response)
+        })
+    }
+    call();
+  }, [])
 
 
   return (
@@ -44,7 +56,7 @@ export default function DashboardAppPage() {
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Total Items" total={124} color="warning" icon={'carbon:inventory-management'} />
+            <AppWidgetSummary title="Total Items" total={12315} color="warning" icon={'carbon:inventory-management'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
@@ -104,13 +116,14 @@ export default function DashboardAppPage() {
           <Grid item xs={12} md={6} lg={8}>
             <AppNewsUpdate
               title="Track Products"
-              list={[...Array(5)].map((_, index) => ({
-                id: faker.datatype.uuid(),
-                title: faker.name.jobTitle(),
-                description: faker.name.jobTitle(),
-                image: `/assets/images/covers/cover_${index + 1}.jpg`,
-                postedAt: faker.date.recent(),
-              }))}
+              list={products.filter((item, index) => index < 5).map((item, index) => ({
+                id: item.id,
+                title: item.name,
+                description: item.desc,
+                image: item.img,
+                postedAt: item.costcount[0].count,
+              }
+              ))}
             />
           </Grid>
 
