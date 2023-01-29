@@ -26,6 +26,7 @@ export default function DashboardAppPage() {
   const { category } = useContext(kpupContext)
   const theme = useTheme();
 
+
   return (
     <>
       <Container maxWidth="xl">
@@ -35,19 +36,19 @@ export default function DashboardAppPage() {
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Weekly Sales" total={714000} icon={'ant-design:android-filled'} />
+            <AppWidgetSummary title="Top Department" total={"Electronics"} icon={'fluent-emoji-high-contrast:department-store'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="New Users" total={1352831} color="info" icon={'ant-design:apple-filled'} />
+            <AppWidgetSummary title="Top Product" total={"Mangoes"} color="info" icon={'icon-park:ad-product'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Item Orders" total={1723315} color="warning" icon={'ant-design:windows-filled'} />
+            <AppWidgetSummary title="Total Items" total={12315} color="warning" icon={'carbon:inventory-management'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Bug Reports" total={234} color="error" icon={'ant-design:bug-filled'} />
+            <AppWidgetSummary title="Total Profit" total={"Rs 234000"} color="error" icon={'tabler:pig-money'} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
@@ -63,13 +64,13 @@ export default function DashboardAppPage() {
                   data: [23, 11, 22, 27, 13, 22, 37, 21],
                 },
                 {
-                  name: 'Expenditure',
+                  name: 'Expenditure(Rs)',
                   type: 'area',
                   fill: 'gradient',
                   data: [44, 55, 41, 67, 22, 43, 21, 41],
                 },
                 {
-                  name: 'Profit',
+                  name: 'Profit(Rs)',
                   type: 'line',
                   fill: 'solid',
                   data: [30, 25, 36, 30, 45, 35, 64, 52],
@@ -82,14 +83,14 @@ export default function DashboardAppPage() {
             <AppCurrentVisits
               title="Category Distribution"
               chartData={[
-                { label: 'Amazon Launchpad', value: 1000 },
-                { label: 'Sports, Fitness & Outdoors', value: 2000 },
-                { label: 'Bags, Wallets and Luggage', value: 2000 },
-                { label: 'Books', value: 1000 },
-                { label: 'Computers & Accessories', value: 1000 },
-                { label: 'Grocery & Gourmet Foods', value: 2000 },
-                { label: 'Office Products', value: 2000 },
-                { label: 'Electronics', value: 1000 },
+                { label: 'Amazon Launchpad', value: 13014 },
+                { label: 'Sports, Fitness & Outdoors', value: 29802 },
+                { label: 'Bags, Wallets and Luggage', value: 24548 },
+                { label: 'Books', value: 20000 },
+                { label: 'Computers & Accessories', value: 9285 },
+                { label: 'Grocery & Gourmet Foods', value: 50280 },
+                { label: 'Office Products', value: 8338 },
+                { label: 'Electronics', value: 19038 },
               ]}
               chartColors={[
                 theme.palette.primary.main,
