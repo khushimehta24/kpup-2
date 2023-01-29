@@ -79,15 +79,15 @@ export default function LoginForm() {
 
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
         <Checkbox name="remember" label="Remember me" />
-        <Link variant="subtitle2" underline="hover">
+        <Link sx={{color: "#00A73C" }} variant="subtitle2" underline="hover">
           Forgot password?
         </Link>
       </Stack>
 
-      {!load ? <LoadingButton onClick={handleClick} fullWidth size="large" type="submit" variant="contained">
+      {!load ? <LoadingButton sx={{ backgroundColor: "#00A73C" }} onClick={handleClick} fullWidth size="large" type="submit" variant="contained">
         Login
       </LoadingButton> : <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <CircularProgress sx={{ backgroundColor: '#2065D1', color: 'white', padding: '5px', borderRadius: '50%' }} />
+        <CircularProgress sx={{ backgroundColor: '#00A73C', color: 'white', padding: '5px', borderRadius: '50%' }} />
       </Box>}
     </>
   );

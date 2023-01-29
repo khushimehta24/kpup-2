@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ReactDOM from "react-dom";
 import Board, { moveCard } from "@lourenci/react-kanban";
 import "@lourenci/react-kanban/dist/styles.css";
+import ScheduleService from "../services/ScheduleService"
 import '../Body.css'
+import { kpupContext } from "../context";
 
 const board = {
     columns: [
@@ -10,7 +12,7 @@ const board = {
             id: 1,
             title: "Restock",
             cards: []
-        }, 
+        },
         {
             id: 2,
             title: "Dispatch",
@@ -27,6 +29,14 @@ const board = {
 
 
 function UncontrolledBoard() {
+    const { token } = useContext(kpupContext)
+    useEffect(() => {
+        ScheduleService.postSchedule(board, token)
+            .then((res) => {
+                console.log(res);
+            })
+    },)
+
     return (
         <Board
             allowRemoveLane
@@ -35,6 +45,7 @@ function UncontrolledBoard() {
             allowAddColumn
             style={{ "& .react-kanban-column": { borderRadius: '50% !important' } }}
             onLaneRemove={console.log}
+            onCardDragEnd={console.log}
             onCardRemove={console.log}
             onLaneRename={console.log}
             initialBoard={board}
