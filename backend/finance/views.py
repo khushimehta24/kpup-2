@@ -34,7 +34,7 @@ class GetSetGoAPI(GenericAPIView):
             data2.append(sold_count)
 
         total_profit = sum(data1)
-        total_sold_count = sum(sold_count)
+        total_sold_count = sum(data2)
 
         score = total_profit/total_sold_count
 
