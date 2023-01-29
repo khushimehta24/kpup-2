@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
 import { Box, Link, Button, Drawer, Typography, Avatar, Stack, CardMedia } from '@mui/material';
@@ -46,6 +46,8 @@ export default function Nav({ openNav, onCloseNav }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
+  const navigate = useNavigate();
 
   const renderContent = (
     <Scrollbar
