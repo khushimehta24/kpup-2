@@ -6,26 +6,21 @@ from .models import *
 from .serializers import *
 from rest_framework.generics import GenericAPIView, ListAPIView
 from django.http.response import JsonResponse
-
+import json
 # Create your views here.
 
 #get all notes
 @api_view(['GET'])
 def get_notes(request):
-    file = open("notes.txt", "r")
-    event_objs = file.read()
-    serializer = NoteSerializer(event_objs,many=True)
-    return Response({'status':200, 'all schedules': serializer.data})
+    file = open("notes.json", "r")
+    event_objs = json.loads(file.read())
+    return Response({'status':200, 'all schedules': event_objs})
 
 #creates note
 @api_view(['POST'])
 def create_note(request):
     data = request.data
-    serializer = NoteSerializer(data = data)
-    if not serializer.is_valid():
-        return Response({'status':403,'message': "something went wrong"})
-    file = open('notes.txt','w')
-    file.write(request.data)
-    file.close()
-    serializer.save()
-    return Response({'status':200, 'payload': serializer.data,'message': "Schedule entered"})
+    stringvalue = str(request.data)
+    with open('notes.json', 'w') as fp:
+        json.dump(request.data, fp)
+    return Response({'status':200, 'payload': request.data ,'message': "Schedule entered"})
