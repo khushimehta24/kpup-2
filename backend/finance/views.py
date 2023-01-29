@@ -17,7 +17,7 @@ class GetSetGoAPI(GenericAPIView):
         categories = Department.objects.all()
         data1, data2= [], []
         for category in categories:
-            sale,spending, sold_count= 0,0,0
+            sale, sold_count= 0,0
             storage_items.filter(category = category)
             for item in storage_items:
                 costcounts = CostCount.objects.filter(item = item)
@@ -25,20 +25,25 @@ class GetSetGoAPI(GenericAPIView):
                     if cc.selling == '':
                         cc.selling = '0'
                     sale += cc.sold_count*int(cc.selling)
-                    if cc.cost_price== '':
-                        cc.cost_price = '0'
-                    sold_count += cc.sold_count
-                    spending += (cc.sold_count+cc.count)*int(cc.cost_price)
-            profit = sale-spending
-            data1.append(profit)
+            data1.append(sale)
             data2.append(sold_count)
 
-        total_profit = sum(data1)
+        total_sale = sum(data1)
         total_sold_count = sum(data2)
 
-        score = total_profit/total_sold_count
+        score = total_sale/total_sold_count
 
-        response = {"score":score}
+        ranks = ['unranked', 'bronze', 'gold', 'silver']
+        if score < 0:
+            rank = ranks[0]
+        elif score >= 50:
+            rank = ranks[1]
+        elif score >= 100:
+            rank = ranks[2]
+        elif score >= 200:
+            rank = ranks[3]
+
+        response = {"score":score, "rank":score}
         return JsonResponse(data = response, status= status.HTTP_200_OK)
 
 
