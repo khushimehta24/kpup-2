@@ -21,9 +21,10 @@ export default function App() {
   const [account, setAccount] = useState(null)
 
 
-  const context = { user, setUser, token, setToken, category, setCategory,account,setAccount };
+  const context = { user, setUser, token, setToken, category, setCategory, account, setAccount };
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("kpupUser")))
+    setToken(localStorage.getItem("kpupToken"))
     // setAccount(JSON.parse(localStorage.getItem("kpupAccount")))
   }, [])
   return (

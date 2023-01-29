@@ -28,10 +28,12 @@ function UploadImg() {
     const [editSinglePerson, setEditSinglePerson] = useState('Add');
     const [load, setLoad] = useState(false)
     const [json, setJson] = useState({
+        'id': new Date().getTime().toString(),
         'name': '',
         'desc': '',
         'img': '',
-        'added_date': new Date(),
+        "threshold": "40",
+        "restock": false,
         'expiry_date': '',
         'category': {
             'name': ''
@@ -77,7 +79,10 @@ function UploadImg() {
         console.log({ file })
     }
     const addProduct = async () => {
-        await ProductServices.addProducts(json, token)
+        await ProductServices.addProducts(json, localStorage.getItem("kpupToken"))
+            .then((res) => {
+                console.log(res)
+            })
     }
     // useEffect(() => {
     //     listAll(imagesListRef).then((response) => {

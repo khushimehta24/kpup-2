@@ -87,19 +87,19 @@ function AddProduct({ img, json, setJson }) {
         setCostCount({ ...costCount, [name]: value })
     }
 
-    const handleCategory = (e) => {
-        const value = e.target.value;
-        setJson({
-            ...json, 'category': {
-                'name': value
-            }
-        })
-    }
+    // const handleCategory = (e) => {
+    //     const value = e.target.value;
+    //     setJson({
+    //         ...json, 'category': {
+    //             'name': value
+    //         }
+    //     })
+    // }
 
     const addToList = (e) => {
         e.preventDefault();
         if (costCount.cost && costCount.cost) {
-            const newCostCount = { ...costCount, dummyId: new Date().getTime().toString() };
+            const newCostCount = { ...costCount };
             setAllCostCount([...allCostCount, newCostCount]);
             setCostCount({ cost: '', count: '', selling: '' })
             setJson({ ...json, 'costcount': [...allCostCount, newCostCount] })
@@ -137,11 +137,14 @@ function AddProduct({ img, json, setJson }) {
                         <Select
                             id="demo-simple-select"
                             value={categoryValue}
-                            onChange={(e) => setJson({
-                                ...json, 'category': {
-                                    'name': categoryList[e.target.value]
-                                }
-                            })}
+                            onChange={(e) => {
+                                setCategoryValue(e.target.value)
+                                setJson({
+                                    ...json, 'category': {
+                                        'name': categoryList[e.target.value]
+                                    }
+                                })
+                            }}
                             sx={{ width: '100%' }}
                         >
                             {
@@ -154,11 +157,7 @@ function AddProduct({ img, json, setJson }) {
                     </Grid>
                 </Grid>
                 <Grid container columnSpacing={3} >
-                    <Grid item md={6} xs={12}>
-                        <p style={{ fontSize: '12px' }}>Current Date</p>
-                        <TextField required value={json.added_date} sx={textField} name='added_date' placeholder='Enter Product Name' disabled id='added_date' onChange={handleChange} />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
+                    <Grid item md={12} xs={12}>
                         <p style={{ fontSize: '12px', marginTop: '3%' }}>Expiry Date</p>
                         <TextField required value={json.expiry_date} InputProps={{ inputProps: { min: date } }} sx={textField} name='expiry_date' type='date' id='expiry_date' onChange={handleChange} />
                     </Grid>

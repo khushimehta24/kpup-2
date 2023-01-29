@@ -12,7 +12,7 @@ const navConfig = [
     icon: icon('ic_analytics'),
   },
   {
-    title: 'user',
+    title: 'Employees',
     path: '/dashboard/user',
     icon: icon('ic_user'),
   },
@@ -21,25 +21,20 @@ const navConfig = [
     path: '/dashboard/products',
     icon: icon('ic_cart'),
   },
+  // {
+  //   title: 'blog',
+  //   path: '/dashboard/blog',
+  //   icon: icon('ic_blog'),
+  // },
   {
-    title: 'blog',
-    path: '/dashboard/blog',
-    icon: icon('ic_blog'),
-  },
-  {
-    title: 'Scan Barcode',
+    title: 'Add Product',
     path: '/dashboard/scanbarcode',
-    icon: icon('ic_scan')
-  },
-  {
-    title: 'Upload CSV',
-    path: '/dashboard/uploadcsv',
-    icon: icon("ic_scan")
+    icon: icon('ic_add')
   },
   {
     title: 'schedule',
     path: '/dashboard/schedule',
-    icon: icon('ic_scan')
+    icon: icon('ic_schedule')
   },
 ];
 

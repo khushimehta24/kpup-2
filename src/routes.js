@@ -29,7 +29,6 @@ export default function Router() {
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
         { path: 'scanbarcode', element: <LabTabs /> },
-        { path: 'uploadcsv', element: <CSVUploadPage /> },
         { path: 'schedule', element: <Kanban /> },
       ],
     },

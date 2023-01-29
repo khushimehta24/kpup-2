@@ -1,11 +1,13 @@
 import httpCommon from "../http-common";
 
-const addProducts = (data, token) => {
-    return httpCommon.post(`/warehouse/item-post/`, data, {
-        "headers": {
-            "Authorization": `Token ${token}`,
+const addProducts = async (data, token) => {
+    const res = await httpCommon.post(`/warehouse/item-post/`, JSON.stringify(data), {
+        headers: {
+            'Authorization': `Token ${token}`,
+            'Content-Type': 'application/json'
         }
     });
+    return res
 };
 
 export default {

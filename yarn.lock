@@ -4311,6 +4311,11 @@
   "resolved" "https://registry.npmjs.org/class-is/-/class-is-1.1.0.tgz"
   "version" "1.1.0"
 
+"classnames@^2.2.6":
+  "integrity" "sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw=="
+  "resolved" "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
+  "version" "2.3.2"
+
 "clean-css@^5.2.2":
   "integrity" "sha512-lCr8OHhiWCTw4v8POJovCoh4T7I9U11yVsPjMWWnnMmp9ZowCxyad1Pathle/9HjaDp+fdQKjO9fQydE6RHTZg=="
   "resolved" "https://registry.npmjs.org/clean-css/-/clean-css-5.3.1.tgz"
@@ -7960,6 +7965,16 @@
   dependencies:
     "tmpl" "1.0.5"
 
+"material-ui-popup-state@^5.0.4":
+  "integrity" "sha512-QdlKHiKv498UNsH3zpQNJ7SN9RYiEjR5MSJIg+a9gqCp43G0A8fo1r0kmX1qFTLGTfYKgXix5RANJkNTujWtxA=="
+  "resolved" "https://registry.npmjs.org/material-ui-popup-state/-/material-ui-popup-state-5.0.4.tgz"
+  "version" "5.0.4"
+  dependencies:
+    "@babel/runtime" "^7.20.6"
+    "@mui/material" "^5.0.0"
+    "classnames" "^2.2.6"
+    "prop-types" "^15.7.2"
+
 "md5.js@^1.3.4":
   "integrity" "sha512-xitP+WxNPcTTOgnTJcrhM0xvdPepipPSf3I8EIpGKeFLjt3PlJLIDG3u8EX53ZIubkb+5U2+3rELYpEhHhzdkg=="
   "resolved" "https://registry.npmjs.org/md5.js/-/md5.js-1.3.5.tgz"
@@ -9718,6 +9733,11 @@
     "workbox-webpack-plugin" "^6.4.1"
   optionalDependencies:
     "fsevents" "^2.3.2"
+
+"react-speech-recognition@^3.10.0":
+  "integrity" "sha512-EVSr4Ik8l9urwdPiK2r0+ADrLyDDrjB0qBRdUWO+w2MfwEBrj6NuRmy1GD3x7BU/V6/hab0pl8Lupen0zwlJyw=="
+  "resolved" "https://registry.npmjs.org/react-speech-recognition/-/react-speech-recognition-3.10.0.tgz"
+  "version" "3.10.0"
 
 "react-toastify@^9.1.1":
   "integrity" "sha512-pkFCla1z3ve045qvjEmn2xOJOy4ZciwRXm1oMPULVkELi5aJdHCN/FHnuqXq8IwGDLB7PPk2/J6uP9D8ejuiRw=="
