@@ -10,6 +10,7 @@ from webscraper.models import *
 # Create your views here.
 class GraphAPI(GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = GraphSerializer
 
     def get(self, request):
         storage_items = StorageItem.objects.filter(user = self.request.user)
@@ -37,7 +38,8 @@ class GraphAPI(GenericAPIView):
         total_sale['data'] = data1
         total_spending['data'] = data2
         total_profit['data'] = data3
-        return JsonResponse({"response":[total_sale, total_spending, total_profit]}, status= status.HTTP_200_OK)
+        response = {"response":[total_sale, total_spending, total_profit]}
+        return JsonResponse( status= status.HTTP_200_OK)
 
 
 
