@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import * 
 
 class NoteSerializer(serializers.Serializer):
-    lamba_string = serializers.CharField()
+    lamba_string = serializers.JSONField()
     class Meta:
         fields = ['lamba_string']
 

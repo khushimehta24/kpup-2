@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework import status, permissions
@@ -15,23 +16,28 @@ class GraphAPI(GenericAPIView):
         categories = Department.objects.all()
         total_sale = {"name":"sale"}
         total_spending = {"name":"spending"}
-        profit = {"name":"profit"}
+        total_profit = {"name":"profit"}
         for category in categories:
             data1, data2, data3 = [], [], []
-            sale,spending, profit = 0,0,0
-            storage_items.filter(dept = category)
+            sale,spending= 0,0
+            storage_items.filter(category = category)
             for item in storage_items:
                 costcounts = CostCount.objects.filter(item = item)
                 for cc in costcounts:
+                    if cc.selling == '':
+                        cc.selling = '0'
                     sale += cc.sold_count*int(cc.selling)
+                    if cc.cost_price== '':
+                        cc.cost_price = '0'
                     spending += (cc.sold_count+cc.count)*int(cc.cost_price)
-            data1.append(sale)
-            data2.append(spending)
-            data3.append(profit)
+            data1.append({"value":sale})
+            data2.append({"value":spending})
+            profit = sale-spending
+            data3.append({"value":profit})
         total_sale['data'] = data1
         total_spending['data'] = data2
-        profit['data'] = data3
-        return JsonResponse({[total_sale, total_spending, profit]}, status= status.HTTP_200_OK)
+        total_profit['data'] = data3
+        return JsonResponse({"response":[total_sale, total_spending, total_profit]}, status= status.HTTP_200_OK)
 
 
 
