@@ -4,7 +4,7 @@ from rest_framework import status, permissions
 from .serializers import *
 from django.http.response import JsonResponse
 from warehouse.models import *
-from backend.webscraper.models import *
+from webscraper.models import *
 
 # Create your views here.
 class GraphAPI(GenericAPIView):
@@ -31,7 +31,7 @@ class GraphAPI(GenericAPIView):
         total_sale['data'] = data1
         total_spending['data'] = data2
         profit['data'] = data3
-        return JsonResponse({[total_sale, total_spending, profit]})
+        return JsonResponse({[total_sale, total_spending, profit]}, status= status.HTTP_200_OK)
 
 
 
