@@ -44,7 +44,7 @@ export default function DashboardAppPage() {
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Total Items" total={12315} color="warning" icon={'carbon:inventory-management'} />
+            <AppWidgetSummary title="Total Items" total={124} color="warning" icon={'carbon:inventory-management'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
