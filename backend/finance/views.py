@@ -23,7 +23,7 @@ class GetSetGoAPI(GenericAPIView):
                 costcounts = CostCount.objects.filter(item = item)
                 for cc in costcounts:
                     if cc.selling == '':
-                        cc.selling = '0'
+                        cc.selling = '10'
                     sale += cc.sold_count*int(cc.selling)
             data1.append(sale)
             data2.append(cc.sold_count)
@@ -35,6 +35,7 @@ class GetSetGoAPI(GenericAPIView):
             score = total_sale/total_sold_count
         else:
             score = 0
+            rank = 'unranked'
 
         ranks = ['unranked', 'bronze', 'gold', 'silver']
         if score <= 0:
