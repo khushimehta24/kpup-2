@@ -98,7 +98,7 @@ export default function AppTrafficBySite({ title, subheader, list, ...other }) {
               >
                 {categoryItems?.map((item) => (
                   <>
-                    <SuggestedProductsCard name={item.name} cover={item.img} />
+                    <SuggestedProductsCard name={item.name} cover={item.img} link={item.link} />
                   </>
                 ))}
               </Box></>}

@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField } from '@mui/material'
+import { Box, Button, CircularProgress, Grid, TextField } from '@mui/material'
 import React, { useState, useEffect, useContext } from 'react'
 import ImageUploader from 'react-image-upload'
 import { v4 as uuidv4 } from 'uuid';
@@ -136,7 +136,9 @@ function UploadImg() {
                 <Loader />
 
             </Grid>}
-            <Button onClick={addProduct} sx={{ textTransform: 'none', height: '3rem', marginTop: '3%', width: '100%', ...AddBtn }} > Add Product</Button>
+            {!loading ? <Button onClick={addProduct} sx={{ textTransform: 'none', height: '3rem', marginTop: '3%', width: '100%', border: '2px solid #00A73C', '&:hover': { border: '2px solid #00A73C !important', backgroundColor: 'white !important', color: '#00A73C !important' }, ...AddBtn }} > Add Product</Button> : <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress sx={{ backgroundColor: '#00A73C', color: 'white', padding: '5px', borderRadius: '50%' }} />
+            </Box>}
 
             {/* <input
                 type="file"

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 // @mui
 import { Box, Card, Link, Typography, Stack, Tooltip } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 // utils
 import { fCurrency } from '../../../utils/formatNumber';
 // components
@@ -18,9 +19,10 @@ const StyledProductImg = styled('img')({
     position: 'absolute',
 });
 
-export default function SuggestedProductSCard({ name, cover }) {
+export default function SuggestedProductSCard({ name, cover, link }) {
+    const navigate = useNavigate()
     return (
-        <Card>
+        <Card onClick={() => window.open(link, '_blank')} >
             <Box sx={{ pt: '100%', position: 'relative' }}>
                 <StyledProductImg alt={name} src={cover} />
             </Box>

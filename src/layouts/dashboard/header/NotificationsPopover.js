@@ -19,6 +19,7 @@ import {
   ListSubheader,
   ListItemAvatar,
   ListItemButton,
+  Chip,
 } from '@mui/material';
 // utils
 import { fToNow } from '../../../utils/formatTime';
@@ -102,6 +103,8 @@ export default function NotificationsPopover() {
 
   return (
     <>
+      <Chip label='Bronze' sx={{ backgroundColor: '#b08d57', color: 'white' }} />
+
       <IconButton color={open ? 'primary' : 'default'} onClick={handleOpen} sx={{ width: 40, height: 40 }}>
         <Badge badgeContent={totalUnRead} color="error">
           <Iconify icon="eva:bell-fill" />
@@ -177,6 +180,7 @@ export default function NotificationsPopover() {
           </Button>
         </Box>
       </Popover>
+
     </>
   );
 }

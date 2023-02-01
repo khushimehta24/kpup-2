@@ -181,7 +181,7 @@ function AddProduct({ img, json, setJson }) {
                     </Grid>
                 </Grid>
                 <Grid item md={12}>
-                    {allCostCount.length !== 0 ? <> <p style={{ fontFamily: 'Readex Pro, sans-serif', fontWeight: '800', color: '#454C59' }}>Varities you added</p>
+                    {allCostCount.length !== 0 ? <> <p style={{ fontFamily: 'Readex Pro, sans-serif', fontWeight: '800', color: '#454C59' }}>Varieties you added</p>
 
                         <TableContainer component={Paper}>
                             <Table sx={{ minWidth: 700 }} aria-label="customized table">

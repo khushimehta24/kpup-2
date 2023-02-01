@@ -15,7 +15,7 @@ export default function ProductsPage() {
   const { token } = useContext(kpupContext)
   const [openFilter, setOpenFilter] = useState(false);
   const [products, setProducts] = useState([]);
-
+  const [load, setLoad] = useState(false)
   useEffect(() => {
     const call = async () => {
       await ProductService.getProducts(token)
