@@ -13,6 +13,8 @@
 - ML - Python : TensorFlow, Sci-kit learn, Pytorch, NumPy, etc.
 - Blockchain - web3-storage
 
+The APIs are hosted here:
+https://kpup.pythonanywhere.com/swagger/
 
 ### Our Vision
 To create a Warehouse Management System that utilizes cutting-edge technology to streamline processes and increase efficiency. With features like barcode scanning and object detection, tracking goods as they enter and exit the warehouse. The automatic reordering system ensures that stock levels are always maintained, while expiry date tracking and reminders keep perishable goods from going to waste. The decentralized storage using WEB3 provides an extra layer of security, monitoring for any suspicious activity. Sales data analysis allows for informed decisions on restocking, while warehouse utilization tracking and web scraping give valuable insights into best-selling products and shipping schedules. Accessibility is improved with a voice assistant, and weather-based guidance helps to protect the stored goods. Our goal is to provide a comprehensive and user-friendly solution to the challenges faced in warehouse manager like Luigi.
@@ -45,3 +47,14 @@ Pre-filling the data obtained
 
 Products cuttently present in the warehouse
 ![App Screenshot](https://drive.google.com/uc?export=download&id=15fsQhin_jLXGyoC6wz75p6OWpmKru_du)
+
+## Feedback
+
+If you have any feedback, feel free to reach out to us.
+
+
+## Contributing
+
+Contributions are always welcome!
+
+Please adhere to this project's `code of conduct`.
